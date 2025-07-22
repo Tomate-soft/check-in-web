@@ -1,0 +1,39 @@
+.openTableButton {
+    background-color: #4caf4f5e; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    padding: 6px 8px;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+.opTable{
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .openTableButton {
+        display: none;
+    }
+
+    .opTable {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        background-color: #4caf4f44;
+        padding: 4px;
+        height: 32px;
+        width: 32px;        
+    }
+}
+
+.openTableButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}

@@ -1,0 +1,14 @@
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-direction: column;
+
+    >span{
+        font-size: 1.5rem;
+        color: white;
+    }
+
+   
+}

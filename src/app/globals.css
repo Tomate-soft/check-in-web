@@ -24,3 +24,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Para navegadores basados en WebKit (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Elimina la apariencia por defecto */
+  margin: 0; /* Asegura que no haya margen residual */
+}
+
+/* Para Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; /* Hace que se vea como un campo de texto normal */
+}
+
+/* Opcional: Para el estándar general (aunque los anteriores son más efectivos) */
+input[type="number"] {
+  appearance: none; /* Propiedad estándar, pero no tan ampliamente soportada para esto */
+}
