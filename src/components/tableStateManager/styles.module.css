@@ -63,11 +63,14 @@
 }
 
 .saveButton {
-    padding: 8px 16px;
     background-color: #9b0505;
-    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     height: 100%;
+    width: 45px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
