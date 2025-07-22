@@ -69,14 +69,6 @@ export const TableStateManager = ({
     <div className={styles.tableStateManager}>
       <strong>{index + 1}</strong>
       <h2 className={styles.tableTitle}>{register.name}</h2>
-
-      <input
-        className={styles.nameSpace}
-        value={register.name}
-        onChange={handleNameChange}
-        placeholder="Nombre del cliente"
-      />
-
       <input
         type="number"
         min={1}
@@ -87,11 +79,15 @@ export const TableStateManager = ({
         placeholder="Número de personas"
       />
 
+      <input
+        className={styles.nameSpace}
+        value={register.name}
+        onChange={handleNameChange}
+        placeholder="Nombre del cliente"
+      />
       <div className={styles.buttons}>
-        <button onClick={handleSave} className={styles.saveButton}>
-          Guardar
-        </button>
-        <button>
+        
+        <button className={styles.saveButton}>
           Asignar mesa
         </button>
       </div>

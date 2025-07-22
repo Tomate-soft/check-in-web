@@ -37,7 +37,6 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                         <TableStateManager register={register} registerArray={registers} tables={tablesArray} addAction={(data)=> {setRegisters(data)}} index={index}/>
                     </li>   
                 ))}
-               
             </ul>
         </div>
     );
