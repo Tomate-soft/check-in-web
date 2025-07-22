@@ -24,6 +24,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
              <button onClick={()=> {
                         setRegisters([...registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
                     }}>Guardar cambios<img src="/sendIcon.svg"/></button>
+                    <button>Mapa de mesas <img src="/table.svg" alt="" /></button>
             </div>
             <div className={styles.logo}>
                 <img src="/tomatePOSlogo.svg" alt="logo" />

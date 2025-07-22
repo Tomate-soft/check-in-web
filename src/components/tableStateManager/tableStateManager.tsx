@@ -85,12 +85,10 @@ export const TableStateManager = ({
         onChange={handleNameChange}
         placeholder="Nombre del cliente"
       />
-      <div className={styles.buttons}>
         
         <button className={styles.saveButton}>
-          Asignar mesa
+         <img src="/table.svg" alt="" />
         </button>
-      </div>
     </div>
   );
 };
