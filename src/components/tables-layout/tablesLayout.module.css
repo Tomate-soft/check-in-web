@@ -61,6 +61,43 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+
+                   
+
+                    >.tablesNumSelector{
+                        background-color: rgba(240, 248, 255, 0.212);
+                        padding: 8px;
+                        border-radius: 8px;
+                        border-radius: 4px;
+                        display: flex;
+                        width: 100%;
+                        gap: 8px;
+                        height: 48px;
+
+                        >input{
+                            flex: 2;
+                            width: 25px;
+                            justify-items: center;
+                            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+                            border-radius: 4px;
+                            padding: 4px;
+                            
+                        }
+
+                        >button{
+                            flex: 1;
+                            background-color: rgb(4, 126, 30);
+                            color: white;
+                            border: none;
+                            cursor: pointer;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 4px;
+                            padding: 4px;
+                            background-color: rgba(255, 255, 255, 0.233);
+                        }
+                    }
                 }
 
                 >footer{
@@ -74,6 +111,12 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                    }
+
+                    >.assignButton{
+                        background-color: rgb(4, 126, 30);
+
+
                     }
                 }
             }

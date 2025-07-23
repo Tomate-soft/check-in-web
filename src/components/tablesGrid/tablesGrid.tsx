@@ -20,6 +20,7 @@ enum ModalOptions {
 export default function TablesGrid({ tablesArray, user, registers, setRegisters }: Props) {
     const [modalOption, setModalOption] = useState<ModalOptions>(ModalOptions.INITIAL_STATE);
     const [selectedTable, setSelectedTable] = useState<Table | null>(null);
+    const [selectedRegister, setSelectedRegister] = useState<CheckInRegister | null>(null);
     return (
        <div>
            <header className={styles.header}>
@@ -39,13 +40,14 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                 {registers?.map((register, index) => (
                     < li key={index}>
                         <TableStateManager setSelectedTable={(table)=> {
+                            setSelectedRegister(register);
                             setModalOption(ModalOptions.TABLES_LAYOUT);
                         }} register={register} registerArray={registers} tables={tablesArray} addAction={(data)=> {setRegisters(data)}} index={index}/>
                     </li>   
                 ))}
             </ul>
             {
-                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} />
+                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedRegister={selectedRegister} setSelectedRegister={setSelectedRegister} selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} />
             }
         </div>
     );

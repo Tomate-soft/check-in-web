@@ -27,9 +27,16 @@ export const TableStateManager = ({
   };
 
   const handleDinersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.min(99, Number(e.target.value));
+    const input = e.target.value;
     const updated = [...registerArray];
-    updated[index] = { ...updated[index], diners: value };
+
+    if (input === '') {
+      updated[index] = { ...updated[index], diners: '' as unknown as number };
+    } else {
+      const value = Math.min(99, Number(input));
+      updated[index] = { ...updated[index], diners: value };
+    }
+
     addAction(updated);
   };
 
@@ -70,11 +77,13 @@ export const TableStateManager = ({
     <div className={styles.tableStateManager}>
       <strong>{index + 1}</strong>
       <h2 className={styles.tableTitle}>{register.name}</h2>
+
       <input
         type="number"
+        min={1}
         max={99}
         className={styles.nameSpace}
-        value={register.diners ?? ''}
+        value={register.diners === undefined || register.diners === ('' as any) ? '' : register.diners}
         onChange={handleDinersChange}
         placeholder="Número de personas"
       />
@@ -85,10 +94,15 @@ export const TableStateManager = ({
         onChange={handleNameChange}
         placeholder="Nombre del cliente"
       />
-        
-        <button className={styles.saveButton} onClick={() => { setSelectedTable(tables[index])}}>
-         <img src="/table.svg" alt="" />
-        </button>
+
+      <button
+        className={styles.saveButton}
+        onClick={() => {
+          if (setSelectedTable) setSelectedTable(tables[index]);
+        }}
+      >
+        <img src="/table.svg" alt="" />
+      </button>
     </div>
   );
 };

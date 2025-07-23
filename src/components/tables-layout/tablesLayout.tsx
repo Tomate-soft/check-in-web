@@ -1,16 +1,22 @@
 import { Table } from '@/store/useTableStore';
 import styles from './tablesLayout.module.css';
+import { CheckInRegister } from '@/app/home/page';
+
 interface Props {
   tablesArray: Table[];
   onClose: () => void;
   selectedTable: Table;
   setSelectedTable: (table: Table) => void;
+  selectedRegister?: CheckInRegister | null;
+  setSelectedRegister?: (register: CheckInRegister | null) => void;
 }
 export default function TablesLayout({
  tablesArray,
  onClose,
  selectedTable,
- setSelectedTable
+ setSelectedTable,
+ selectedRegister,
+ setSelectedRegister,
 }: Props) {
   return (
     <main className={styles.screen}>
@@ -19,7 +25,6 @@ export default function TablesLayout({
             <button className={styles.closeButton} onClick={onClose}>
                 x
             </button>
-            
         </header>
         <main>
                   {tablesArray?.map((table) => {
@@ -36,7 +41,21 @@ export default function TablesLayout({
                             >
                                 {isSelected ? (
                                     <>
-                                        <span >{table.tableNum}</span>
+                                        <header className={styles.selectedHeader}>
+                                            <h3>Comensales</h3>
+                                        </header>
+                                        <main >
+                                            <div className={styles.tablesNumSelector}>
+                                                <button>-</button>
+                                                <input value={selectedRegister.diners}/> 
+                                                <button>+</button>
+                                            </div>
+                                        </main>
+                                        <footer>
+                                            <button className={styles.assignButton} >
+                                                Asignar mesa
+                                            </button>
+                                        </footer>
                                     </>
                                 ) : (
                                     <>
