@@ -1,9 +1,15 @@
 import { create } from 'zustand';
+type User = {
+  _id: string;
+  name: string;
+  // agrega más campos si tu modelo tiene más
+}
 
 export interface Table {
   _id: string;
   tableNum: string;
   status: string;
+  user: User;
   // agrega más campos si tu modelo tiene más
 }
 
@@ -33,6 +39,7 @@ export const UseTableStore = create<State>((set) => ({
       }
 
       const data: Table[] = await res.json();
+      console.log(data);
       set({ tablesArray: data, isLoading: false, errors: false });
     } catch (error) {
       console.error(error);

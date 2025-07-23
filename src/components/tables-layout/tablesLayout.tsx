@@ -24,7 +24,7 @@ export default function TablesLayout({
         <main>
                   {tablesArray?.map((table) => {
                         const isSelected = selectedTable?._id === table?._id;
-                        if (table.status !== 'free') return null;
+                        if (table.status !== 'free' || !table.user) return null;
                         return (
                             <div
                                 key={table._id}
@@ -40,10 +40,10 @@ export default function TablesLayout({
                                     </>
                                 ) : (
                                     <>
-                                        <header><span>{table.status}</span></header>
+                                        <header><span>{table?.user?.name ?? "No asignada"}</span></header>
                                         <main>{table.tableNum}</main>
                                         <footer>
-                                            <button>Abrir mesa</button>
+                                           { table.user &&  <button>Abrir mesa</button>}
                                         </footer>
                                     </>
                                 )}
