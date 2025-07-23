@@ -1,9 +1,10 @@
 import { Table } from "@/store/useTableStore";
 import { TableStateManager } from "../tableStateManager/tableStateManager";
 import styles from "./tablesGrid.module.css";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { CheckInRegister } from "@/app/home/page";
 import TablesLayout from "../tables-layout/tablesLayout";
+import { set } from "ref-napi";
 
 interface Props {
     tablesArray: Table[];
@@ -21,6 +22,20 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     const [modalOption, setModalOption] = useState<ModalOptions>(ModalOptions.INITIAL_STATE);
     const [selectedTable, setSelectedTable] = useState<Table | null>(null);
     const [selectedRegister, setSelectedRegister] = useState<CheckInRegister | null>(null);
+    const newRegister: CheckInRegister = {
+        name: "",
+        initialTime: "",
+        finalTime: "",
+        resumeTime: "",
+        status: "",
+        diners: 1,
+    };
+    useEffect(() => {
+        if(!selectedRegister){
+          setSelectedRegister(newRegister);  
+        }
+           
+    }, [modalOption]);
     return (
        <div>
            <header className={styles.header}>
@@ -47,7 +62,11 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                 ))}
             </ul>
             {
-                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedRegister={selectedRegister} setSelectedRegister={setSelectedRegister} selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} />
+                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedRegister={selectedRegister} setSelectedRegister={setSelectedRegister} selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} onClose={()=> {
+                    setModalOption(ModalOptions.INITIAL_STATE);
+                    setSelectedTable(null);
+                    setSelectedRegister(null);
+                }} />
             }
         </div>
     );
