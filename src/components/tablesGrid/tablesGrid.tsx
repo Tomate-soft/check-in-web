@@ -47,7 +47,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
            <header className={styles.header}>
             <div className={styles.addRegister}>
              <button onClick={handleClick}>Añadir nuevo registro<img src="/sendIcon.svg"/></button>
-                    <button onClick={()=> setModalOption(ModalOptions.TABLES_LAYOUT)}>Mapa de mesas <img src="/table.svg" alt="" /></button>
+                <button onClick={()=> setModalOption(ModalOptions.TABLES_LAYOUT)}>Mapa de mesas <img src="/table.svg" alt="" /></button>
             </div>
             <div className={styles.logo}>
                 <img src="/tomatePOSlogo.svg" alt="logo" />
