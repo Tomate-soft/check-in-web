@@ -3,10 +3,14 @@ import styles from './tablesLayout.module.css';
 interface Props {
   tablesArray: Table[];
   onClose: () => void;
+  selectedTable: Table;
+  setSelectedTable: (table: Table) => void;
 }
 export default function TablesLayout({
  tablesArray,
- onClose
+ onClose,
+ selectedTable,
+ setSelectedTable
 }: Props) {
   return (
     <main className={styles.screen}>
@@ -18,11 +22,34 @@ export default function TablesLayout({
             
         </header>
         <main>
-                    {tablesArray.map((table) => (
-                        <div key={table.tableNum} className={styles.table}>
-                            <span>{table.status}</span>
-                        </div>
-                    ))}
+                  {tablesArray?.map((table) => {
+                        const isSelected = selectedTable?._id === table?._id;
+                        if (table.status !== 'free') return null;
+                        return (
+                            <div
+                                key={table._id}
+                                className={styles.table}
+                                onClick={() => {
+                                    if (table.status !== "free") return;
+                                    setSelectedTable(table);
+                                }}
+                            >
+                                {isSelected ? (
+                                    <>
+                                        <span >{table.tableNum}</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <header><span>{table.status}</span></header>
+                                        <main>{table.tableNum}</main>
+                                        <footer>
+                                            <button>Abrir mesa</button>
+                                        </footer>
+                                    </>
+                                )}
+                            </div>
+                        );
+                    })}
             </main>
       </div>
     </main>

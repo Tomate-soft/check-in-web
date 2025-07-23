@@ -4,6 +4,8 @@ import styles from "./tablesGrid.module.css";
 import { useState } from "react";
 import { CheckInRegister } from "@/app/home/page";
 import TablesLayout from "../tables-layout/tablesLayout";
+import { table } from "console";
+import { set } from "ref-napi";
 
 interface Props {
     tablesArray: Table[];
@@ -19,6 +21,7 @@ enum ModalOptions {
 
 export default function TablesGrid({ tablesArray, user, registers, setRegisters }: Props) {
     const [modalOption, setModalOption] = useState<ModalOptions>(ModalOptions.INITIAL_STATE);
+    const [selectedTable, setSelectedTable] = useState<Table | null>(null);
     return (
        <div>
            <header className={styles.header}>
@@ -37,12 +40,14 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
             <ul className={styles.tablesGrid}>
                 {registers?.map((register, index) => (
                     < li key={index}>
-                        <TableStateManager register={register} registerArray={registers} tables={tablesArray} addAction={(data)=> {setRegisters(data)}} index={index}/>
+                        <TableStateManager setSelectedTable={(table)=> {
+                            setModalOption(ModalOptions.TABLES_LAYOUT);
+                        }} register={register} registerArray={registers} tables={tablesArray} addAction={(data)=> {setRegisters(data)}} index={index}/>
                     </li>   
                 ))}
             </ul>
             {
-                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout tablesArray={tablesArray} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)}/>
+                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} />
             }
         </div>
     );

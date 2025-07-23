@@ -34,11 +34,43 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 16px;
             padding: 16px;
+            backdrop-filter: blur(3px);
 
             >.table{
-                border: 1px solid yellow;
+                background-color: rgba(240, 248, 255, 0.178);
                 border-radius: 8px;
                 min-height: 150px;
+                padding: 8px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                >header {
+                    border: 1px solid red;
+
+                }
+                
+                >main{
+                    flex: 1;
+                    font-size: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                >footer{
+                    >button{
+                        width: 100%;
+                        padding: 8px;
+                        background-color: rgb(167, 1, 1);
+                        color: rgba(255, 255, 255, 0.781);
+                        border-radius: 4px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
             }
            
         }

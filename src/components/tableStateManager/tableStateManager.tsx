@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 import { Table } from "@/store/useTableStore";
 import { TableStatus } from "@/types/tableStatus";
 import { CheckInRegister } from "@/app/home/page";
+import { set } from "ref-napi";
 
 interface TableStateManagerProps {
   tables: Table[];
@@ -9,6 +10,7 @@ interface TableStateManagerProps {
   registerArray: CheckInRegister[];
   addAction: (data: CheckInRegister[]) => void;
   index: number;
+  setSelectedTable?: (table: Table) => void;
 }
 
 export const TableStateManager = ({
@@ -16,7 +18,8 @@ export const TableStateManager = ({
   register,
   addAction,
   index,
-  registerArray
+  registerArray,
+  setSelectedTable,
 }: TableStateManagerProps) => {
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +88,7 @@ export const TableStateManager = ({
         placeholder="Nombre del cliente"
       />
         
-        <button className={styles.saveButton}>
+        <button className={styles.saveButton} onClick={() => { setSelectedTable(tables[index])}}>
          <img src="/table.svg" alt="" />
         </button>
     </div>
