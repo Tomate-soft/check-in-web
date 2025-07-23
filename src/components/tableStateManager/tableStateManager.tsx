@@ -1,8 +1,6 @@
 import styles from "./styles.module.css";
 import { Table } from "@/store/useTableStore";
-import { TableStatus } from "@/types/tableStatus";
 import { CheckInRegister } from "@/app/home/page";
-import { set } from "ref-napi";
 
 interface TableStateManagerProps {
   tables: Table[];
