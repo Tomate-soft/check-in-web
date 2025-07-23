@@ -19,8 +19,7 @@ export default function TablesLayout({
         </header>
         <main>
                     {tablesArray.map((table) => (
-                        <div key={table.id} className={styles.table}>
-                            <span>{table.name}</span>
+                        <div key={table.tableNum} className={styles.table}>
                             <span>{table.status}</span>
                         </div>
                     ))}
