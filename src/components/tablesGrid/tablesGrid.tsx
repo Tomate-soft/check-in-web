@@ -3,6 +3,7 @@ import { TableStateManager } from "../tableStateManager/tableStateManager";
 import styles from "./tablesGrid.module.css";
 import { useState } from "react";
 import { CheckInRegister } from "@/app/home/page";
+import TablesLayout from "../tables-layout/tablesLayout";
 
 interface Props {
     tablesArray: Table[];
@@ -12,7 +13,8 @@ interface Props {
 }
 
 enum ModalOptions {
-    INITIAL_STATE
+    INITIAL_STATE,
+    TABLES_LAYOUT,
 }
 
 export default function TablesGrid({ tablesArray, user, registers, setRegisters }: Props) {
@@ -24,7 +26,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
              <button onClick={()=> {
                         setRegisters([...registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
                     }}>Guardar cambios<img src="/sendIcon.svg"/></button>
-                    <button>Mapa de mesas <img src="/table.svg" alt="" /></button>
+                    <button onClick={()=> setModalOption(ModalOptions.TABLES_LAYOUT)}>Mapa de mesas <img src="/table.svg" alt="" /></button>
             </div>
             <div className={styles.logo}>
                 <img src="/tomatePOSlogo.svg" alt="logo" />
@@ -39,6 +41,9 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                     </li>   
                 ))}
             </ul>
+            {
+                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout tablesArray={tablesArray} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)}/>
+            }
         </div>
     );
 }

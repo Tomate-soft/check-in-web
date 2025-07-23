@@ -71,7 +71,6 @@ export const TableStateManager = ({
       <h2 className={styles.tableTitle}>{register.name}</h2>
       <input
         type="number"
-        min={1}
         max={99}
         className={styles.nameSpace}
         value={register.diners ?? ''}
