@@ -176,3 +176,21 @@
         }
     }
 }
+
+.addButton {
+        border-radius: 8px;
+        background-color: rgba(240, 248, 255, 0.068);
+        border: 1px solid rgba(240, 248, 255, 0.13);
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        display: flex;
+        padding: 16px;
+        font-size: 16px;
+
+    >img {
+        width: 24px;
+        height: 24px;
+        
+    }
+}

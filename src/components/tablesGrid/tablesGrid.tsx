@@ -30,6 +30,12 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
         status: "",
         diners: 1,
     };
+
+    const handleClick = ()=> {
+                        setRegisters([...registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
+                    }
+
+    
     useEffect(() => {
         if(!selectedRegister){
           setSelectedRegister(newRegister);  
@@ -40,9 +46,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
        <div>
            <header className={styles.header}>
             <div className={styles.addRegister}>
-             <button onClick={()=> {
-                        setRegisters([...registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
-                    }}>Guardar cambios<img src="/sendIcon.svg"/></button>
+             <button onClick={handleClick}>Añadir nuevo registro<img src="/sendIcon.svg"/></button>
                     <button onClick={()=> setModalOption(ModalOptions.TABLES_LAYOUT)}>Mapa de mesas <img src="/table.svg" alt="" /></button>
             </div>
             <div className={styles.logo}>
@@ -52,6 +56,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
              <h1>{`${user.name} ${user.lastName}`}</h1>
            </header>
             <ul className={styles.tablesGrid}>
+
                 {registers?.map((register, index) => (
                     < li key={index}>
                         <TableStateManager setSelectedTable={(table)=> {
@@ -60,6 +65,8 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                         }} register={register} registerArray={registers} tables={tablesArray} addAction={(data)=> {setRegisters(data)}} index={index}/>
                     </li>   
                 ))}
+                    <button onClick={handleClick} className={styles.addButton}><img src="/add-icon.svg" alt="" />Añadir nuevo registro</button>
+
             </ul>
             {
                 modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedRegister={selectedRegister} setSelectedRegister={setSelectedRegister} selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} onClose={()=> {
