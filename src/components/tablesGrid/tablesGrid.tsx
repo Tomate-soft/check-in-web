@@ -4,7 +4,6 @@ import styles from "./tablesGrid.module.css";
 import { use, useEffect, useState } from "react";
 import { CheckInRegister } from "@/app/home/page";
 import TablesLayout from "../tables-layout/tablesLayout";
-import { set } from "ref-napi";
 
 interface Props {
     tablesArray: Table[];
