@@ -76,8 +76,6 @@ export const TableStateManager = ({
   return (
     <div className={styles.tableStateManager}>
       <strong>{index + 1}</strong>
-      <h2 className={styles.tableTitle}>{register.name}</h2>
-
       <input
         type="number"
         min={1}
@@ -100,8 +98,21 @@ export const TableStateManager = ({
         onClick={() => {
           if (setSelectedTable) setSelectedTable(tables[index]);
         }}
+
+        
       >
         <img src="/table.svg" alt="" />
+      </button>
+      <button
+        className={styles.trashButton}
+        onClick={() => {
+          registerArray.splice(index, 1);
+          addAction([...registerArray]);
+        }}
+
+        
+      >
+        <img src="/trash-icon.svg" alt="" />
       </button>
     </div>
   );
