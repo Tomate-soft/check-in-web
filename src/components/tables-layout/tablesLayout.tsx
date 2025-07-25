@@ -27,6 +27,7 @@ export default function TablesLayout({
 }: Props) {
   const [modalOption, setModalOption] = useState<ModalOptions>(ModalOptions.INITIAL_STATE);
   const openTableAction = UseTableStore((state) => state.openTable);
+  const getTablesAction = UseTableStore((state) => state.getTables);
   const isLoading = UseTableStore((state) => state.isLoading);
   const errors = UseTableStore((state) => state.errors);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,7 +155,7 @@ export default function TablesLayout({
           })}
         </main>
          {
-        modalOption === ModalOptions.CONFIRM_CHANGES && <ConfirmChangesModal loading={isLoading} errors={errors} isOpen={true} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} closeModal={onClose}>Cambios guardados</ConfirmChangesModal>
+        modalOption === ModalOptions.CONFIRM_CHANGES && <ConfirmChangesModal loading={isLoading} errors={errors} isOpen={true} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} closeModal={onClose} actionType={getTablesAction}>Cambios guardados</ConfirmChangesModal>
       }
       </div>
      
