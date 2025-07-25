@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-export type User = {
+type User = {
   _id: string;
   name: string;
   lastName: string;

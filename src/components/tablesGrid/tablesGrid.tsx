@@ -1,9 +1,10 @@
-import { Table, User } from "@/store/useTableStore";
+import { Table} from "@/store/useTableStore";
 import { TableStateManager } from "../tableStateManager/tableStateManager";
 import styles from "./tablesGrid.module.css";
 import { use, useEffect, useState } from "react";
 import { CheckInRegister } from "@/app/home/page";
 import TablesLayout from "../tables-layout/tablesLayout";
+import { User } from "@/store/useUserStore";
 
 interface Props {
     tablesArray: Table[];
@@ -33,7 +34,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     const handleClick = ()=> {
                         setRegisters([...registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
                     }
-                    
+
     useEffect(() => {
         if(!selectedRegister){
           setSelectedRegister(newRegister);  

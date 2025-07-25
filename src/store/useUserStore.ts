@@ -2,13 +2,18 @@
 import { create } from 'zustand';
 
 // 1. Define el tipo para el usuario
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
   lastName: string;
   employeeNumber: string;
   pinPos: number;
+  role: {
+    role: {
+      name: string;
+    };
+  };
   // Agrega más propiedades del usuario según tu API
 }
 
