@@ -4,6 +4,7 @@ import { UseTableStore } from "@/store/useTableStore";
 import { useUserStore } from "@/store/useUserStore";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
+
 export interface CheckInRegister {
     name: string;
     diners: number;

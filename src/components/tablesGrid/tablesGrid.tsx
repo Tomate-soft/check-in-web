@@ -52,7 +52,10 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                 <img src="/tomatePOSlogo.svg" alt="logo" />
                 <span>Check in</span>
              </div>
-             <h1>{`${user.name} ${user.lastName}`}</h1>
+             <div className={styles.userInfo}>
+             <h2>{`${user.name} ${user.lastName}`}</h2>
+             <h3>{`${user.employeeNumber} ${user.role.role.name}`}</h3>
+             </div>
            </header>
             <ul className={styles.tablesGrid}>
 

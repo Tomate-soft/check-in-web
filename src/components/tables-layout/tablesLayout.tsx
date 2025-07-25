@@ -64,7 +64,6 @@ export default function TablesLayout({
           {tablesArray?.map((table) => {
             const isSelected = selectedTable?._id === table?._id;
             if (table.status !== 'free' || !table.user) return null;
-
             return (
               <div
                 key={table._id}

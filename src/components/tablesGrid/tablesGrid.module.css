@@ -2,10 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(219, 10, 10, 0.219);
+    box-shadow: 0px 0px 18px rgba(209, 10, 10, 0.315);
 
     
 
-    >h1{
+    >div>h2{
         flex: 1;
         text-align: center;
         font-size: 2rem;
@@ -16,11 +19,24 @@
         display: flex;
         padding: 16px 16px 0px 16px;
     }
-
+    
     >div:first-child {
        justify-content: flex-start;
        gap: 16px;
         
+    }
+    >div:last-child{
+        >h2 {
+            font-size: 1.5rem;
+            color: #969191;
+        }
+        >h3 {
+            font-size: 1.2rem;
+            color: #969191;
+        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;    
     }
 
     .logo {
@@ -84,7 +100,7 @@
             }
         }
 
-        >h1 {
+        div>h2 {
             font-size: 1rem;
             margin-bottom: 8px;
         }
