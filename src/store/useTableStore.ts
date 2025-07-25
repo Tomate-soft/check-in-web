@@ -1,3 +1,4 @@
+import { enableTableService } from '@/services/assignTable';
 import { create } from 'zustand';
 type User = {
   _id: string;
@@ -22,14 +23,15 @@ export interface Table {
 
 interface State {
   isLoading: boolean;
-  errors: boolean;
+  errors: Error | string | null | boolean;
   tablesArray: Table[];
   getTables: () => Promise<void>;
+  openTable: (tableId: string, body: {diners: number}) => Promise<void>;
 }
 
 export const UseTableStore = create<State>((set) => ({
   isLoading: false,
-  errors: false,
+  errors: null,
   tablesArray: [],
   getTables: async () => {
     set({ isLoading: true });
@@ -53,6 +55,27 @@ export const UseTableStore = create<State>((set) => ({
       set({ isLoading: false, errors: true });
     }
   },
+  openTable: async (tableId: string, body) => {
+    set({ isLoading: true });
+    try {
+      const res = await enableTableService(tableId, body);
+      set({ isLoading: false });
+      console.log('Mesa abierta correctamente');
+      console.log(res);
+      // const updatedTable: Table = await res.json();
+      // set((state) => ({
+      //   tablesArray: state.tablesArray.map((table) =>
+      //     table._id === updatedTable._id ? updatedTable : table
+      //   ),
+      //   isLoading: false,
+      //   errors: false,
+      // }));
+    } catch (error) {
+      console.error(error);
+      set({ isLoading: false, errors: true });
+    }
+  },
+
 }));
 //     updateTables: async (arg, userId) => {
 //       set({ isLoading: true })

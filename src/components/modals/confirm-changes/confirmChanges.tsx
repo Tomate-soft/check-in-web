@@ -1,4 +1,6 @@
+import { error } from 'console';
 import styles from './confirmChanges.module.css';
+import { useEffect } from 'react';
 
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
   closeModal?: any;
   conflict?: any;
   navigate?: () => void;
+  cleanUp?: () => void;
 }
 
 export default function ConfirmChangesModal({
@@ -25,8 +28,18 @@ export default function ConfirmChangesModal({
   closeModal,
   conflict,
   navigate,
+  cleanUp,
 }: Props) {
-
+  useEffect(() => {
+    console.log('Modal opened');
+    console.log('Loading:', loading);
+    console.log('Errors:', errors);
+    return () => {
+      if(cleanUp) {
+        cleanUp();
+      }
+    }
+  }, [errors, loading, isOpen]);
   if (!isOpen) return null;
   if (!loading && !errors) {
     setTimeout(async () => {

@@ -1,6 +1,8 @@
-import { Table } from '@/store/useTableStore';
+import { Table, UseTableStore } from '@/store/useTableStore';
 import styles from './tablesLayout.module.css';
 import { CheckInRegister } from '@/app/home/page';
+import { use, useState } from 'react';
+import ConfirmChangesModal from '../modals/confirm-changes/confirmChanges';
 
 interface Props {
   tablesArray: Table[];
@@ -11,6 +13,10 @@ interface Props {
   setSelectedRegister?: (register: CheckInRegister | null) => void;
 }
 
+enum ModalOptions {
+  INITIAL_STATE = 'INITIAL_STATE',
+  CONFIRM_CHANGES = 'CONFIRM_CHANGES',
+}
 export default function TablesLayout({
   tablesArray,
   onClose,
@@ -19,6 +25,10 @@ export default function TablesLayout({
   selectedRegister,
   setSelectedRegister,
 }: Props) {
+  const [modalOption, setModalOption] = useState<ModalOptions>(ModalOptions.INITIAL_STATE);
+  const openTableAction = UseTableStore((state) => state.openTable);
+  const isLoading = UseTableStore((state) => state.isLoading);
+  const errors = UseTableStore((state) => state.errors);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!setSelectedRegister || !selectedRegister) return;
 
@@ -120,7 +130,12 @@ export default function TablesLayout({
                       </div>
                     </main>
                     <footer>
-                      <button className={styles.assignButton}>Asignar mesa</button>
+                      <button onClick={()=> {
+                        if (!selectedTable || !selectedRegister) return;
+                        openTableAction(selectedTable._id, { diners: selectedRegister.diners ?? 1 });
+                        setModalOption(ModalOptions.CONFIRM_CHANGES);
+                          
+                      }} className={styles.assignButton}>Asignar mesa</button>
                     </footer>
                   </>
                 ) : (
@@ -138,7 +153,11 @@ export default function TablesLayout({
             );
           })}
         </main>
+         {
+        modalOption === ModalOptions.CONFIRM_CHANGES && <ConfirmChangesModal loading={isLoading} errors={errors} isOpen={true} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} closeModal={onClose}>Cambios guardados</ConfirmChangesModal>
+      }
       </div>
+     
     </main>
   );
 }

@@ -1,4 +1,4 @@
-export const enableTableService = async (id: string, body = {}) => {
+export const enableTableService = async (id: string, body = { diners : 1}) => {
   const res = await fetch(`https://internal.api.tomatesoft.com/tables/enable/host/${id}`, {
     method: 'PATCH',
     headers: {
