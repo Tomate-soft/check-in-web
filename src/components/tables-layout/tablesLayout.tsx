@@ -56,8 +56,9 @@ export default function TablesLayout({
     <main className={styles.screen}>
       <div>
         <header>
+          <h2>Control de mesas</h2>
           <button className={styles.closeButton} onClick={onClose}>
-            x
+            <img src="/crossButton.svg" alt="cross-icon" />
           </button>
         </header>
         <main>
