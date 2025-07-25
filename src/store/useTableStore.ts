@@ -1,7 +1,14 @@
 import { create } from 'zustand';
-type User = {
+export type User = {
   _id: string;
   name: string;
+  lastName: string;
+  employeeNumber: string;
+  role: {
+    role: {
+      name: string;
+    };
+  };
   // agrega más campos si tu modelo tiene más
 }
 
