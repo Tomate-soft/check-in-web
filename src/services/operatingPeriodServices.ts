@@ -18,7 +18,7 @@ export const updatePeriodService =  async (id: string, body: CheckInRegister[]) 
     headers: {
       "Content-Type" : "application/json",
     },
-    body:JSON.stringify(body),
+    body: JSON.stringify(body),
   }) 
 
 }

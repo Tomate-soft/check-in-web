@@ -37,7 +37,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     };
 
     const handleUpdate = ()=> {
-        updatePeriod(currentPeriod._id, registers)
+        updatePeriod(currentPeriod._id)
     }
 
     const handleClick = ()=> {
@@ -49,8 +49,8 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
         getCurrentPeriod();
         if(!selectedRegister){
           setSelectedRegister(newRegister);  
-        }  
-        addRegisters([]);
+        } 
+        console.log(currentPeriod) ;
     }, [modalOption]);
     return (
        <div>

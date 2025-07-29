@@ -8,7 +8,7 @@ interface State {
   period: any;
   getCurrentPeriod: () => Promise<void>;
   addRegisters: (resgisters: CheckInRegister[]) => void;
-  updatePeriod: (id: string, body: CheckInRegister[]) => void;
+  updatePeriod: (id: string) => void;
 }
 
 export const useOperatingPeriodStore = create<State>((set, get) => ({
@@ -31,9 +31,12 @@ export const useOperatingPeriodStore = create<State>((set, get) => ({
     const period = get().period;
     set({period: {...period, registers: registerArray}})
   },
-  updatePeriod: async (id, body) => {
+  updatePeriod: async (id) => {
     set({ isLoading: true })
     try {
+      const body = get().period?.registers ?? [];
+      console.log("aqui es el rolete ")
+      console.log(body)
       const res = await updatePeriodService(id, body);
       set({isLoading: false})
     } catch (error) {
