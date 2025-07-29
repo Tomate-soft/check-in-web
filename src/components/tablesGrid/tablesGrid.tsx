@@ -6,6 +6,7 @@ import { CheckInRegister } from "@/app/home/page";
 import TablesLayout from "../tables-layout/tablesLayout";
 import { User } from "@/store/useUserStore";
 import { useOperatingPeriodStore } from "@/store/usePeriodStore";
+import ConfirmChangesModal from "../modals/confirm-changes/confirmChanges";
 
 interface Props {
     tablesArray: Table[];
@@ -17,6 +18,7 @@ interface Props {
 enum ModalOptions {
     INITIAL_STATE,
     TABLES_LAYOUT,
+    CONFIRM_CHANGES
 }
 
 export default function TablesGrid({ tablesArray, user, registers, setRegisters }: Props) {
@@ -27,6 +29,9 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     const addRegisters = useOperatingPeriodStore((state) => state.addRegisters);
     const updatePeriod = useOperatingPeriodStore((state) => state.updatePeriod);
     const currentPeriod = useOperatingPeriodStore((state)=> state.period);
+    const isLoading = useOperatingPeriodStore((state)=> state.isLoading);
+    const errors = useOperatingPeriodStore((state)=> state.errors);
+
     const newRegister: CheckInRegister = {
         name: "",
         initialTime: "",
@@ -37,6 +42,8 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     };
 
     const handleUpdate = ()=> {
+                        setModalOption(ModalOptions.CONFIRM_CHANGES);
+
         updatePeriod(currentPeriod._id)
     }
 
@@ -51,7 +58,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
           setSelectedRegister(newRegister);  
         } 
         console.log(currentPeriod) ;
-    }, [modalOption]);
+    }, [modalOption, updatePeriod]);
     return (
        <div>
            <header className={styles.header}>
@@ -88,6 +95,9 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                     setSelectedRegister(null);
                 }} />
             }
+             {
+                    modalOption === ModalOptions.CONFIRM_CHANGES && <ConfirmChangesModal loading={isLoading} errors={errors} isOpen={true} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} actionType={getCurrentPeriod}>Cambios guardados</ConfirmChangesModal>
+                  }
         </div>
     );
 }
