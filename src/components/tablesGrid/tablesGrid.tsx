@@ -70,7 +70,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
              {/* { currentPeriod && <span>{new Date(currentPeriod.createdAt).toLocaleDateString("ES-mx")}</span> } */}
            </header>
             <ul className={styles.tablesGrid}>
-                {registers?.map((register, index) => (
+                {currentPeriod?.registers?.map((register, index) => (
                     < li key={index}>
                         <TableStateManager setSelectedTable={(table)=> {
                             setSelectedRegister(register);
