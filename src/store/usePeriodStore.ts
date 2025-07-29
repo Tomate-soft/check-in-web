@@ -29,7 +29,7 @@ export const useOperatingPeriodStore = create<State>((set, get) => ({
   },
   addRegisters: (registerArray )=> {
     const period = get().period;
-    set({period: {...period, register: registerArray}})
+    set({period: {...period, registers: registerArray}})
   },
   updatePeriod: async (id, body) => {
     set({ isLoading: true })

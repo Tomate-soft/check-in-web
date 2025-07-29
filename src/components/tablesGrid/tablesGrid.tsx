@@ -41,7 +41,8 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     }
 
     const handleClick = ()=> {
-                        setRegisters([...registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
+                        addRegisters([...currentPeriod?.registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
+                        console.log(currentPeriod.registers)
                     }
 
     useEffect(() => {
@@ -75,7 +76,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
                         <TableStateManager setSelectedTable={(table)=> {
                             setSelectedRegister(register);
                             setModalOption(ModalOptions.TABLES_LAYOUT);
-                        }} register={register} registerArray={registers} tables={tablesArray} addAction={(data)=> {setRegisters(data)}} index={index}/>
+                        }} register={register} registerArray={currentPeriod.registers} tables={tablesArray} addAction={(data)=> {addRegisters(data)}} index={index}/>
                     </li>   
                 ))}
                     <button onClick={handleClick} className={styles.addButton}><img src="/add-icon.svg" alt="" />Añadir nuevo registro</button>
