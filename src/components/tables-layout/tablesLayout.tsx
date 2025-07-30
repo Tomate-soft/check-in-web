@@ -158,7 +158,6 @@ export default function TablesLayout({
         modalOption === ModalOptions.CONFIRM_CHANGES && <ConfirmChangesModal loading={isLoading} errors={errors} isOpen={true} onClose={()=> setModalOption(ModalOptions.INITIAL_STATE)} closeModal={onClose} actionType={getTablesAction}>Cambios guardados</ConfirmChangesModal>
       }
       </div>
-     
     </main>
   );
 }

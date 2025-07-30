@@ -58,7 +58,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
           setSelectedRegister(newRegister);  
         } 
         console.log(currentPeriod) ;
-    }, [modalOption, updatePeriod]);
+    }, [updatePeriod]);
     return (
        <div>
            <header className={styles.header}>
