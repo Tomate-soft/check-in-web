@@ -8,6 +8,11 @@
   align-items: center;
   gap: 8px;
 
+  >strong{
+    width: 24px;
+    overflow: hidden;
+  }
+
     >input:nth-child(3){
       flex: 1;
     }
@@ -82,3 +87,23 @@
    border: 1px solid yellow !important;
 }
 
+.nameSpace{
+  flex: 1;
+}
+
+.dinersCount{
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    margin-left: 8px;
+    height: 100%;
+    padding: 12px 6px;
+    border-radius: 8px;
+    background-color: #ffffff15;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1) inset;
+    text-indent: 8px;
+
+}

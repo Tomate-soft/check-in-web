@@ -99,7 +99,7 @@ export default function TablesLayout({
                             const current = selectedRegister.diners;
                             const newValue =
                               typeof current === 'number' ? Math.max(1, current - 1) : 1;
-                            setSelectedRegister({ ...selectedRegister, diners: newValue });
+                            setSelectedRegister({ ...selectedRegister, diners: newValue,  });
                           }}
                         >
                           -
@@ -134,6 +134,7 @@ export default function TablesLayout({
                       <button onClick={()=> {
                         if (!selectedTable || !selectedRegister) return;
                         openTableAction(selectedTable._id, { diners: selectedRegister.diners ?? 1 });
+                        setSelectedRegister({...selectedRegister, status: "complete"})
                         setModalOption(ModalOptions.CONFIRM_CHANGES);
                           
                       }} className={styles.assignButton}>Asignar mesa</button>

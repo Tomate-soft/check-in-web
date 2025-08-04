@@ -74,18 +74,20 @@ export const TableStateManager = ({
   };
 
   return (
-    <div className={styles.tableStateManager}>
+    <div className={styles.tableStateManager} style={register.status === "complete" ? { opacity: 0.6 } : {}}>
       <strong>{index + 1}</strong>
       <input
         type="number"
         min={1}
         max={99}
-        className={styles.nameSpace}
+        className={styles.dinersCount}
         value={register.diners === undefined || register.diners === ('' as any) ? '' : register.diners}
         onChange={handleDinersChange}
         placeholder="Número de personas"
       />
-
+      {
+        register.diners > 4 && <img src="./people.svg" alt="icon" width="35px" />
+      }
       <input
         className={styles.nameSpace}
         value={register.name}
@@ -98,8 +100,6 @@ export const TableStateManager = ({
         onClick={() => {
           if (setSelectedTable) setSelectedTable(tables[index]);
         }}
-
-        
       >
         <img src="/table.svg" alt="" />
       </button>
