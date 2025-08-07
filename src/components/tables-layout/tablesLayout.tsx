@@ -11,6 +11,8 @@ interface Props {
   setSelectedTable: (table: Table) => void;
   selectedRegister?: CheckInRegister | null;
   setSelectedRegister?: (register: CheckInRegister | null) => void;
+  selectedIndex: number;
+  actionType: () => void;
 }
 
 enum ModalOptions {
@@ -24,12 +26,15 @@ export default function TablesLayout({
   setSelectedTable,
   selectedRegister,
   setSelectedRegister,
+  selectedIndex,
+  actionType
 }: Props) {
   const [modalOption, setModalOption] = useState<ModalOptions>(ModalOptions.INITIAL_STATE);
   const openTableAction = UseTableStore((state) => state.openTable);
   const getTablesAction = UseTableStore((state) => state.getTables);
   const isLoading = UseTableStore((state) => state.isLoading);
   const errors = UseTableStore((state) => state.errors);
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!setSelectedRegister || !selectedRegister) return;
 
@@ -134,6 +139,8 @@ export default function TablesLayout({
                       <button onClick={()=> {
                         if (!selectedTable || !selectedRegister) return;
                         openTableAction(selectedTable._id, { diners: selectedRegister.diners ?? 1 });
+                        // hacer un seteo, pero ocupamos el index del elemento 
+                        actionType()
                         setSelectedRegister({...selectedRegister, status: "complete"})
                         setModalOption(ModalOptions.CONFIRM_CHANGES);
                           

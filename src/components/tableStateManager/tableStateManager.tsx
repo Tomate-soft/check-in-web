@@ -66,7 +66,6 @@ export const TableStateManager = ({
         ...current,
         finalTime: now.toISOString(),
         resumeTime: resume,
-        status: "completed",
       };
     }
 
@@ -74,7 +73,7 @@ export const TableStateManager = ({
   };
 
   return (
-    <div className={styles.tableStateManager} style={register.status === "complete" ? { opacity: 0.6 } : {}}>
+    <div className={styles.tableStateManager} style={register.status === "complete" ? { opacity: 0.45 } : {}}>
       <strong>{index + 1}</strong>
       <input
         type="number"
@@ -94,7 +93,10 @@ export const TableStateManager = ({
         onChange={handleNameChange}
         placeholder="Nombre del cliente"
       />
-
+      {
+        register.status !== "complete" ? (
+          <>
+           
       <button
         className={styles.saveButton}
         onClick={() => {
@@ -114,6 +116,10 @@ export const TableStateManager = ({
       >
         <img src="/trash-icon.svg" alt="" />
       </button>
+          </>
+        ) : null
+      }
+
     </div>
   );
 };

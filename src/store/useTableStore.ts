@@ -26,7 +26,7 @@ interface State {
   errors: Error | string | null | boolean;
   tablesArray: Table[];
   getTables: () => Promise<void>;
-  openTable: (tableId: string, body: {diners: number}) => Promise<void>;
+  openTable: (tableId: string, body: { diners: number }) => Promise<void>;
 }
 
 export const UseTableStore = create<State>((set) => ({

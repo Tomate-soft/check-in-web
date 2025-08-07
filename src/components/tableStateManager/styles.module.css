@@ -83,9 +83,7 @@
     background-color: #9292923b;
 }
 
-.nameSpace:last-child{
-   border: 1px solid yellow !important;
-}
+
 
 .nameSpace{
   flex: 1;

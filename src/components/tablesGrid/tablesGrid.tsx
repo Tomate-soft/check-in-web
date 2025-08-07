@@ -31,6 +31,8 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     const currentPeriod = useOperatingPeriodStore((state)=> state.period);
     const isLoading = useOperatingPeriodStore((state)=> state.isLoading);
     const errors = useOperatingPeriodStore((state)=> state.errors);
+    const [selectedIndex, setSelectedIndex ] =  useState<number>()
+    const [showAll, setShowAll] = useState<boolean>(false)
 
     const newRegister: CheckInRegister = {
         name: "",
@@ -42,10 +44,17 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
     };
 
     const handleUpdate = ()=> {
-                        setModalOption(ModalOptions.CONFIRM_CHANGES);
-
-        updatePeriod(currentPeriod._id)
+        setModalOption(ModalOptions.CONFIRM_CHANGES);
+        updatePeriod(currentPeriod._id, currentPeriod?.registers)
     }
+
+    const handleUpdateAssigTable = ()=> {
+        const copy = [...currentPeriod?.registers];
+        copy[selectedIndex] = { ...selectedRegister, status: "complete" };
+        setModalOption(ModalOptions.CONFIRM_CHANGES);
+        updatePeriod(currentPeriod._id, copy)
+    }
+
 
     const handleClick = ()=> {
                         addRegisters([...currentPeriod?.registers, { name: '', initialTime: '', finalTime: '', resumeTime: '', status: '', diners: 1 }]);
@@ -63,6 +72,7 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
        <div>
            <header className={styles.header}>
             <div className={styles.addRegister}>
+                <button onClick={()=> setShowAll(!showAll)}>{showAll ? "Mostrar solo completos" : "Mostrar todos"}</button>
                 <button onClick={handleClick}>Añadir nuevo registro<img src="/sendIcon.svg"/></button>
                 <button onClick={()=> setModalOption(ModalOptions.TABLES_LAYOUT)}>Mapa de mesas <img src="/table.svg" alt="" /></button>
                 <button  onClick={handleUpdate}>Guardar cambios</button>
@@ -78,18 +88,24 @@ export default function TablesGrid({ tablesArray, user, registers, setRegisters 
              {/* { currentPeriod && <span>{new Date(currentPeriod.createdAt).toLocaleDateString("ES-mx")}</span> } */}
            </header>
             <ul className={styles.tablesGrid}>
-                {currentPeriod?.registers?.map((register, index) => (
-                    < li key={index}>
-                        <TableStateManager setSelectedTable={(table)=> {
-                            setSelectedRegister(register);
-                            setModalOption(ModalOptions.TABLES_LAYOUT);
-                        }} register={register} registerArray={currentPeriod.registers} tables={tablesArray} addAction={(data)=> {addRegisters(data)}} index={index}/>
-                    </li>   
-                ))}
+                {currentPeriod?.registers?.map((register, index) => {
+                    if(register.status !== "complete" || showAll){
+                        return (
+                            < li key={index}>
+                                <TableStateManager setSelectedTable={(table)=> {
+                                    setSelectedRegister(register);
+                                    setSelectedIndex(index);
+                                    setModalOption(ModalOptions.TABLES_LAYOUT);
+                                }} register={register} registerArray={currentPeriod.registers} tables={tablesArray} addAction={(data)=> {addRegisters(data)}} index={index}/>
+                            </li>   
+                            )
+                        }
+                        return null;
+                })}
                     <button onClick={handleClick} className={styles.addButton}><img src="/add-icon.svg" alt="" />Añadir nuevo registro</button>
-            </ul>
+                </ul>
             {
-                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedRegister={selectedRegister} setSelectedRegister={setSelectedRegister} selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} onClose={()=> {
+                modalOption === ModalOptions.TABLES_LAYOUT && <TablesLayout selectedRegister={selectedRegister} actionType={handleUpdateAssigTable} setSelectedRegister={setSelectedRegister} selectedTable={selectedTable} setSelectedTable={(table)=> {setSelectedTable(table)}} tablesArray={tablesArray} selectedIndex={selectedIndex} onClose={()=> {
                     setModalOption(ModalOptions.INITIAL_STATE);
                     setSelectedTable(null);
                     setSelectedRegister(null);
